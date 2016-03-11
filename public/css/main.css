@@ -1,0 +1,120 @@
+body {
+	font: 14px/1.8em Segoe UI, Arial, Verdana, Tahoma, sans-serif;
+}
+
+table {
+	border-collapse: collapse;
+	border-spacing: 0px;
+}
+
+table.offer_table tr th {
+	background-color: #df2226;
+	color: #FFFFFF;
+	font-size: 14px;
+	border: 1px solid rgb(153, 153, 153);
+	padding: 0px 2px 2px 12px;
+}
+
+table.offer_table td {
+	border: 1px solid #999999;
+	color: #000000;
+	font-size: 12px;
+	padding: 12px;
+	text-align: left;
+	line-height: 15px;
+}
+
+#header {
+	width: 800px;
+	text-align: left;
+	padding-top: 20px;
+}
+
+#main-nav {
+	position: relative;
+	left: -30px;
+}
+
+#main-nav ul li {
+	display: inline;
+}
+
+#main-nav ul li a {
+	color: #000000;
+	font-size: .8em;
+	padding: 10px 0px 4px 0px;
+	margin-right: 20px; /*spacing between each menu link*/
+	text-decoration: none;
+	border-bottom: 2px solid white;
+}
+
+#main-nav ul li a:hover {
+	border-bottom-color: #000000;
+}
+
+#content {
+	width: 800px;
+	height: auto;
+	text-align: left;
+}
+
+#content.homepage {
+	height: 700px !important;
+}
+
+#footer {
+	width: 800px;
+	text-align: center;
+}
+
+#footer-nav a {
+	font-size: .8em;
+	color: #000000;
+	padding: 10px 0px 4px 0px;
+	margin-right: 20px; /*spacing between each menu link*/
+	text-decoration: none;
+	border-bottom: 2px solid white;
+}
+
+#manageOffers {
+	padding-left: 20px;
+}
+
+.font-red {
+	color: red;
+}
+
+.input-text {
+	width: 400px;
+}
+
+textarea {
+	width: 400px;
+	height: 80px;
+}
+
+form .ng-invalid.ng-dirty {
+	background-color: lightpink;
+}
+
+form .ng-valid.ng-dirty {
+	background-color: lightgreen;
+}
+
+span.summary.ng-invalid {
+	color: red;
+	font-weight: bold;
+}
+
+span.summary.ng-valid {
+	color: green;
+}
+
+div.error {
+	color: red !important;
+	font-weight: bold;
+}
+
+.help-block.error {
+	color: red !important;
+}

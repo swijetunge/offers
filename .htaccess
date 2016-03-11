@@ -1,0 +1,49 @@
+# Allow Symbolic links
+# - required for mod_rewrite to work
+	Options +FollowSymLinks
+
+# Prevent folder indexes when no index.html / .php exists
+	Options -Indexes
+
+# Restrict HTTP methods to those declared
+# All non-defined methods 'Require valid-user'
+<LimitExcept POST GET>
+
+	Require valid-user
+
+</LimitExcept>
+
+# URL Re-Write Rules
+<IfModule mod_rewrite.c>
+
+	RewriteEngine On
+	RewriteBase /
+	RewriteCond %{REQUEST_FILENAME} -s [OR]
+	RewriteCond %{REQUEST_FILENAME} -l [OR]
+	RewriteCond %{REQUEST_FILENAME} -d
+	RewriteRule ^.*$ - [NC,L]
+	RewriteRule ^([a-z-]+)/?$ /?page=$1 [QSA,NC,L]
+
+</IfModule>
+
+	AddType text/x-component .htc
+
+# Compress all text, html, css and javascript:
+
+<IfModule mod_deflate.c>
+
+	AddOutputFilterByType DEFLATE text/html text/plain text/xml text/css application/x-javascript application/javascript text/javascript
+
+	# Netscape 4.x has some problems...
+	BrowserMatch ^Mozilla/4 gzip-only-text/html
+
+	# Netscape 4.06-4.08 have some more problems
+	BrowserMatch ^Mozilla/4\.0[678] no-gzip
+
+	# MSIE masquerades as Netscape, but it is fine
+	BrowserMatch \bMSIE !no-gzip !gzip-only-text/html
+
+	# Make sure proxies don't deliver the wrong content
+	# Header append Vary User-Agent env=!dont-vary
+
+</IfModule>
