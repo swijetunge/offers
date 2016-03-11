@@ -60,6 +60,12 @@ $postModule.controller('PostController',function($scope, $http){
 		$scope.saveUser();
 	}
 	
+	$scope.newUser = function(){
+		$scope.editMode = false;
+		$scope.tempUser = '';
+		$scope.index 	= '';
+	}
+	
 	$scope.editUser = function(user){
 		$scope.tempUser = {
 			id: user.id,

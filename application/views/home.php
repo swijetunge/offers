@@ -122,13 +122,11 @@
 	                  <i class="ion ion-clipboard"></i>
 	                  <h3 class="box-title">Offers List</h3>
 	                  <div class="box-tools pull-right">
-	                    <ul class="pagination pagination-sm inline">
-	                      <li><a href="#">&laquo;</a></li>
-	                      <li><a href="#">1</a></li>
-	                      <li><a href="#">2</a></li>
-	                      <li><a href="#">3</a></li>
-	                      <li><a href="#">&raquo;</a></li>
-	                    </ul>
+	                    <div class="tools">
+			           		<button data-ng-click="newUser()" class="btn btn-sm pull-right" data-toggle="modal" data-target="#viewoffer">
+			           			<i class="fa fa-plus"></i> Add item
+			           		</button>
+						</div>
 	                  </div>
 	                </div><!-- /.box-header -->
 	                <div class="box-body">
@@ -146,14 +144,14 @@
 								</thead>
 								<tbody>
 									<tr data-ng-repeat="user in post.users | orderBy : '-id'">
-										<th scope="row">{{user.id}}</th>
+										<td scope="row">{{user.id}}</td>
 										<td> {{user.name}} </td>
 										<td> {{user.email}} </td>
 										<td> {{user.companyName}} </td>
 										<td> {{user.designation}} </td>
 										<td> 
 											<div class="tools">
-						                        <i data-ng-click="editUser(user)" class="fa fa-edit"></i>
+						                        <i data-ng-click="editUser(user)" class="fa fa-edit" data-toggle="modal" data-target="#viewoffer"></i>
 						                        <i data-ng-click="deleteUser(user)" class="fa fa-trash-o"></i>
 						                      </div>
 										</td>
@@ -161,65 +159,74 @@
 								</tbody>
 							</table>
 						</div>
-						<div class="box-footer clearfix no-border">
-			           		<button class="btn btn-default pull-right"><i class="fa fa-plus"></i> Add item</button>
-						</div>
 					</div>
 					
-					<div class="box-body">
-						<div class="col-xs-12 col-sm-4 col-md-4 col-lg-4">
-							<div class="alert alert-danger text-center alert-failure-div" role="alert" style="display: none">
-								<p></p>
+					
+		            <div id="viewoffer" class="modal fade in" role="dialog">
+		              <div class="modal-dialog">
+		                <div class="modal-content">
+		                  <div class="modal-header">
+		                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">×</span></button>
+		                    <h4 class="modal-title">View Offer</h4>
+		                  </div>
+		                  <div class="modal-body">
+		                    <div class="box-body">
+								<div class="col-xs-12">
+									<div class="alert alert-danger text-center alert-failure-div" role="alert" style="display: none">
+										<p></p>
+									</div>
+									<div class="alert alert-success text-center alert-success-div" role="alert" style="display: none">
+										<p></p>
+									</div>
+									<form novalidate name="userForm" >
+										<div class="form-group">
+											<label for="exampleInputEmail1">Name</label> 
+											<input data-ng-minlength="3" required type="text" class="form-control" id="name" name="name" placeholder="Name" data-ng-model='tempUser.name'>
+											<span class="help-block error" data-ng-show="userForm.name.$invalid && userForm.name.$dirty">
+												{{getError(userForm.name.$error, 'name')}}
+											</span>
+										</div>
+										<div class="form-group">
+											<label for="exampleInputEmail1">Email</label> 
+											<input data-ng-minlength="3" required type="email" class="form-control" id="email" name="email" placeholder="Email" data-ng-model='tempUser.email'>
+											<span class="help-block error" data-ng-show="userForm.email.$invalid && userForm.email.$dirty">
+												{{getError(userForm.email.$error, 'email')}}
+											</span>
+										</div>
+										<div class="form-group">
+											<label for="exampleInputPassword1">Company Name</label>  
+											<input data-ng-minlength="3" required type="text" class="form-control" id="company_name" name="company_name" placeholder="Company Name" data-ng-model='tempUser.companyName'>
+											<span class="help-block error" data-ng-show="userForm.company_name.$invalid && userForm.company_name.$dirty">
+												{{getError(userForm.company_name.$error, 'company_name')}}
+											</span>
+										</div>
+										<div class="form-group">
+											<label for="exampleInputFile">Designation</label> 
+											<input data-ng-minlength="3" required type="text" class="form-control" id="designation" name="designation" placeholder="Designation" data-ng-model='tempUser.designation'>
+											<span class="help-block error" data-ng-show="userForm.designation.$invalid && userForm.designation.$dirty">
+												{{getError(userForm.designation.$error, 'designation')}}
+											</span>
+										</div>
+										<!-- <input type="hidden" data-ng-model='tempUser.id'>  -->
+										<div class="text-center">
+											<button ng-disabled="userForm.$invalid" data-loading-text="Saving User..." ng-hide="tempUser.id" type="submit" class="btn btn-primary" data-ng-click="addUser()">Save Offer</button>
+											<button ng-disabled="userForm.$invalid" data-loading-text="Updating User..." ng-hide="!tempUser.id" type="submit" class="btn btn-primary" data-ng-click="updateUser()">Update Offer</button>
+										</div>
+									</form>
+									<div class="clearfix"></div>
+									<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 text-center">
+									
+									</div>
+								</div>
 							</div>
-							<div class="alert alert-success text-center alert-success-div" role="alert" style="display: none">
-								<p></p>
-							</div>
-							<form novalidate name="userForm" >
-								<div class="form-group">
-									<label for="exampleInputEmail1">Name</label> 
-									<input data-ng-minlength="3" required type="text" class="form-control" id="name" name="name" placeholder="Name" data-ng-model='tempUser.name'>
-									<span class="help-block error" data-ng-show="userForm.name.$invalid && userForm.name.$dirty">
-										{{getError(userForm.name.$error, 'name')}}
-									</span>
-								</div>
-								<div class="form-group">
-									<label for="exampleInputEmail1">Email</label> 
-									<input data-ng-minlength="3" required type="email" class="form-control" id="email" name="email" placeholder="Email" data-ng-model='tempUser.email'>
-									<span class="help-block error" data-ng-show="userForm.email.$invalid && userForm.email.$dirty">
-										{{getError(userForm.email.$error, 'email')}}
-									</span>
-								</div>
-								<div class="form-group">
-									<label for="exampleInputPassword1">Company Name</label>  
-									<input data-ng-minlength="3" required type="text" class="form-control" id="company_name" name="company_name" placeholder="Company Name" data-ng-model='tempUser.companyName'>
-									<span class="help-block error" data-ng-show="userForm.company_name.$invalid && userForm.company_name.$dirty">
-										{{getError(userForm.company_name.$error, 'company_name')}}
-									</span>
-								</div>
-								<div class="form-group">
-									<label for="exampleInputFile">Designation</label> 
-									<input data-ng-minlength="3" required type="text" class="form-control" id="designation" name="designation" placeholder="Designation" data-ng-model='tempUser.designation'>
-									<span class="help-block error" data-ng-show="userForm.designation.$invalid && userForm.designation.$dirty">
-										{{getError(userForm.designation.$error, 'designation')}}
-									</span>
-								</div>
-								<!-- <input type="hidden" data-ng-model='tempUser.id'>  -->
-								<div class="text-center">
-									<button ng-disabled="userForm.$invalid" data-loading-text="Saving User..." ng-hide="tempUser.id" type="submit" class="btn btn-default" data-ng-click="addUser()">Save User</button>
-									<button ng-disabled="userForm.$invalid" data-loading-text="Updating User..." ng-hide="!tempUser.id" type="submit" class="btn btn-default" data-ng-click="updateUser()">Update User</button>
-								</div>
-							</form>
-							<div class="clearfix"></div>
-							<div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 text-center">
-							
-							</div>
-							
-						</div>
-					</div>
+		                  </div>
+		                </div><!-- /.modal-content -->
+		              </div><!-- /.modal-dialog -->
+		            </div><!-- /.modal -->
 					
 				</div><!-- /.box -->
             </section>
-            
+        
             <section class="col-lg-12 connectedSortable">
 
               <!-- TO DO List -->
@@ -257,71 +264,6 @@
                         <i class="fa fa-trash-o"></i>
                       </div>
                     </li>
-                    <li>
-                      <span class="handle">
-                        <i class="fa fa-ellipsis-v"></i>
-                        <i class="fa fa-ellipsis-v"></i>
-                      </span>
-                      <input type="checkbox" value="" name="">
-                      <span class="text">Make the theme responsive</span>
-                      <small class="label label-info"><i class="fa fa-clock-o"></i> 4 hours</small>
-                      <div class="tools">
-                        <i class="fa fa-edit"></i>
-                        <i class="fa fa-trash-o"></i>
-                      </div>
-                    </li>
-                    <li>
-                      <span class="handle">
-                        <i class="fa fa-ellipsis-v"></i>
-                        <i class="fa fa-ellipsis-v"></i>
-                      </span>
-                      <input type="checkbox" value="" name="">
-                      <span class="text">Let theme shine like a star</span>
-                      <small class="label label-warning"><i class="fa fa-clock-o"></i> 1 day</small>
-                      <div class="tools">
-                        <i class="fa fa-edit"></i>
-                        <i class="fa fa-trash-o"></i>
-                      </div>
-                    </li>
-                    <li>
-                      <span class="handle">
-                        <i class="fa fa-ellipsis-v"></i>
-                        <i class="fa fa-ellipsis-v"></i>
-                      </span>
-                      <input type="checkbox" value="" name="">
-                      <span class="text">Let theme shine like a star</span>
-                      <small class="label label-success"><i class="fa fa-clock-o"></i> 3 days</small>
-                      <div class="tools">
-                        <i class="fa fa-edit"></i>
-                        <i class="fa fa-trash-o"></i>
-                      </div>
-                    </li>
-                    <li>
-                      <span class="handle">
-                        <i class="fa fa-ellipsis-v"></i>
-                        <i class="fa fa-ellipsis-v"></i>
-                      </span>
-                      <input type="checkbox" value="" name="">
-                      <span class="text">Check your messages and notifications</span>
-                      <small class="label label-primary"><i class="fa fa-clock-o"></i> 1 week</small>
-                      <div class="tools">
-                        <i class="fa fa-edit"></i>
-                        <i class="fa fa-trash-o"></i>
-                      </div>
-                    </li>
-                    <li>
-                      <span class="handle">
-                        <i class="fa fa-ellipsis-v"></i>
-                        <i class="fa fa-ellipsis-v"></i>
-                      </span>
-                      <input type="checkbox" value="" name="">
-                      <span class="text">Let theme shine like a star</span>
-                      <small class="label label-default"><i class="fa fa-clock-o"></i> 1 month</small>
-                      <div class="tools">
-                        <i class="fa fa-edit"></i>
-                        <i class="fa fa-trash-o"></i>
-                      </div>
-                    </li>
                   </ul>
                 </div><!-- /.box-body -->
                 <div class="box-footer clearfix no-border">
@@ -348,9 +290,11 @@
 	<?php include($_SERVER['DOCUMENT_ROOT'].'/application/views/includes/footer.php'); ?>
 	<!-- page script -->
     <script>
-      $(function () {
-        $("#offers").DataTable();
-      });
+	    $(document).ready(function(){
+		      $(function () {
+		        $("#_offers").DataTable();
+		      });
+	    });
     </script>
   </body>
 </html>
